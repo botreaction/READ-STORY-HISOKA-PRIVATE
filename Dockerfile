@@ -1,23 +1,19 @@
+# Use Node.js v14
 FROM node:21
 
-# Set working directory
-WORKDIR /usr/src/app
+# Create app directory
+WORKDIR /usr/src/index
 
-# Copy package files and install dependencies
-COPY package.json ./
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+COPY package*.json ./
+
 RUN npm install
 
-# Install system dependencies
-RUN apt-get update && \
-    apt-get install -y ffmpeg imagemagick webp && \
-    apt-get upgrade -y && \
-    rm -rf /var/lib/apt/lists/*
-
-# Copy the rest of the application files
+# Bundle app source
 COPY . .
 
-# Expose the required port
+# Expose the port
 EXPOSE 3000
 
-# Command to run the application
-CMD ["node", "index.js"]
+CMD [ "node", "index.js" ]

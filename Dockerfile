@@ -1,19 +1,19 @@
-# Use Node.js v14
-FROM node:21
+FROM node:lts-buster
 
-# Create app directory
-WORKDIR /usr/src/app
+RUN apt-get update && \
+  apt-get install -y \
+  ffmpeg \
+  imagemagick \
+  webp && \
+  apt-get upgrade -y && \
+  rm -rf /var/lib/apt/lists/*
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-COPY package*.json ./
+COPY package.json .
 
 RUN npm install
 
-# Bundle app source
 COPY . .
 
-# Expose the port
-EXPOSE 3000
+EXPOSE 5000
 
-CMD [ "node", "index.js" ]
+CMD ["npm", "start"]

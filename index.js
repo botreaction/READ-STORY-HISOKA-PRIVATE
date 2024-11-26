@@ -4,9 +4,6 @@ import { watchFile, unwatchFile } from 'fs';
 import cfonts from 'cfonts'; 
 import treeKill from './lib/tree-kill.js';
 import chalk from 'chalk';
-const express = require('express');
-const app = express();
-const port = 3000;
 
 let activeProcess = null;
 

@@ -1,3 +1,7 @@
+const express = require('express');
+const app = express();
+const port = 3000;
+
 import path from 'path';
 import { spawn } from 'child_process';
 import { watchFile, unwatchFile } from 'fs';
